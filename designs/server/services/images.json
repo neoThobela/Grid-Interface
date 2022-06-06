@@ -1,0 +1,228 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_BjJGPAtMLKKqJc5y",
+        "type": "tab",
+        "createdDate": "2022-06-06T10:45:20.200Z",
+        "label": "images",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "images",
+        "relativeParentPath": ""
+    },
+    {
+        "id": "sd_LLQsElTJSRklkel5",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_BjJGPAtMLKKqJc5y",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "/get-all-images",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "httpOptions": {
+            "/get-all-images": {
+                "get": {
+                    "summary": "",
+                    "description": "",
+                    "consumes": [],
+                    "produces": [],
+                    "parameters": [],
+                    "responses": {}
+                }
+            }
+        },
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "category": "HTTP",
+        "x": 125,
+        "y": 120,
+        "wires": [
+            [
+                "sd_lSwKpKWR3aW8xXAn"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "images",
+        "functionName": "sd_LLQsElTJSRklkel5"
+    },
+    {
+        "id": "sd_lSwKpKWR3aW8xXAn",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_BjJGPAtMLKKqJc5y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.result = [\n    { category: \"group1\", name: 'Group 1', image: \"/Web/Images/about.jpg\" },\n    { category: \"group2\", name: 'Group 2', image: \"/Web/Images/01-large.jpg\" },\n    { category: \"group1\", name: 'Group 1', image: \"/Web/Images/02-large.jpg\" },\n    { category: \"group3\", name: 'Group 3', image: \"/Web/Images/03-large.jpg\" },\n    { category: \"group2\", name: 'Group 2', image: \"/Web/Images/04-large.jpg\" },\n    { category: \"group3\", name: 'Group 3', image: \"/Web/Images/05-large.jpg\" },\n    { category: \"group1\", name: 'Group 1', image: \"/Web/Images/06-large.jpg\" },\n    { category: \"group2\", name: 'Group 2', image: \"/Web/Images/07-large.jpg\" },\n    { category: \"group3\", name: 'Group 3', image: \"/Web/Images/08-large.jpg\" }\n];\n\nbh.local.status = 200;",
+        "functionName": "sd_lSwKpKWR3aW8xXAn",
+        "category": "Function",
+        "x": 245,
+        "y": 120,
+        "wires": [
+            [
+                "sd_gCsoI4WiH1wKtor8"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_gCsoI4WiH1wKtor8",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_BjJGPAtMLKKqJc5y",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "result",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "status",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "responseMapping": {
+            "status": "bh.local.status",
+            "obj": "bh.local.result",
+            "send": "bh.local.result"
+        },
+        "inputs": 1,
+        "outputs": 0,
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_gCsoI4WiH1wKtor8",
+        "category": "HTTP",
+        "x": 385,
+        "y": 120,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_9MSS8uGAvydX7ZD6",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_BjJGPAtMLKKqJc5y",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_2MUB7EyUKM9otUIg",
+            "sd_k0v5ONBm5U5WsmSg"
+        ],
+        "functionName": "sd_9MSS8uGAvydX7ZD6",
+        "category": "General",
+        "x": 125,
+        "y": 260,
+        "wires": [
+            [
+                "sd_2MUB7EyUKM9otUIg"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "images"
+    },
+    {
+        "id": "sd_2MUB7EyUKM9otUIg",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_BjJGPAtMLKKqJc5y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.status = 500;",
+        "functionName": "sd_2MUB7EyUKM9otUIg",
+        "category": "Function",
+        "x": 245,
+        "y": 260,
+        "wires": [
+            [
+                "sd_k0v5ONBm5U5WsmSg"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_k0v5ONBm5U5WsmSg",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_BjJGPAtMLKKqJc5y",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "error",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "status",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "responseMapping": {
+            "status": "bh.local.status",
+            "obj": "bh.error",
+            "send": "bh.error"
+        },
+        "inputs": 1,
+        "outputs": 0,
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_k0v5ONBm5U5WsmSg",
+        "category": "HTTP",
+        "x": 380,
+        "y": 260,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    }
+]

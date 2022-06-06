@@ -1,0 +1,13 @@
+{
+    "displayName": "gridApp",
+    "appName": "gridapp",
+    "description": "Display grid",
+    "lastModified": "2022-06-06T09:05:55.444Z",
+    "imgSourcePath": "",
+    "version": "1.0.0",
+    "appType": "classic",
+    "templateName": "blank",
+    "createDate": "2022-06-06T09:05:54.330Z",
+    "analyticsId": "dbfb2d95-2bff-f0d2-dc20-8730738e7f7e",
+    "createdStudioVersion": "8.1.1"
+}

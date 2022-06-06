@@ -1,0 +1,19 @@
+/*Importing default angular material css theme. */
+
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "nDefaults.scss";
+
+.textAlignCenter {
+    text-align: center;
+}
+.gridImageContainer {
+    img {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 1.5em;
+    }
+}
+.selectedBtn {
+    background: purple;
+    color: white;
+}

@@ -1,0 +1,402 @@
+[
+    {
+        "id": "sd_D0mVnaqNHaMT83OW",
+        "type": "tab",
+        "createdDate": "2022-06-06T09:27:00.540Z",
+        "label": "home",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "homeComponent"
+    },
+    {
+        "id": "sd_nlmi3FumCMPKap9D",
+        "type": "OnInit",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "inputVariables": [],
+        "localVariables": [],
+        "outputVariables": [],
+        "functionName": "sd_nlmi3FumCMPKap9D",
+        "category": "Lifecycle Events",
+        "x": 105,
+        "y": 80,
+        "wires": [
+            [
+                "sd_4XDlMGeNXgM8c09e"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "homeComponent"
+    },
+    {
+        "id": "sd_4XDlMGeNXgM8c09e",
+        "type": "PageVariables",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [
+            {
+                "textIp": "allImage",
+                "typedIpValue": {
+                    "type": "literal",
+                    "value": "[]"
+                }
+            },
+            {
+                "textIp": "sortedImages",
+                "typedIpValue": {
+                    "type": "literal",
+                    "value": "[]"
+                }
+            },
+            {
+                "textIp": "selectedCategory",
+                "typedIpValue": {
+                    "type": "str",
+                    "value": "all"
+                }
+            },
+            {
+                "textIp": "categoryButtons",
+                "typedIpValue": {
+                    "type": "literal",
+                    "value": "[]"
+                }
+            },
+            {
+                "textIp": "ssdUrl",
+                "typedIpValue": {
+                    "type": "str",
+                    "value": ""
+                }
+            },
+            {
+                "textIp": "isLoading",
+                "typedIpValue": {
+                    "type": "literal",
+                    "value": "false"
+                }
+            }
+        ],
+        "functionName": "sd_4XDlMGeNXgM8c09e",
+        "category": "Function",
+        "x": 205,
+        "y": 80,
+        "wires": [
+            [
+                "sd_eP0xqmWdyCK0J1qP"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true,
+        "serviceName": "homeComponent"
+    },
+    {
+        "id": "sd_DhFv3GrY0aMa77Jl",
+        "type": "PageStart",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "get image by category",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "category",
+                "defaultValue": {
+                    "type": "str",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "getImageByCategory",
+        "category": "General",
+        "x": 105,
+        "y": 280,
+        "wires": [
+            [
+                "sd_xJKwSPJZ41xeMflw"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "homeComponent"
+    },
+    {
+        "id": "sd_xJKwSPJZ41xeMflw",
+        "type": "Script",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "page.selectedCategory = bh.input.category;\n\npage.sortedImages = (bh.input.category === 'all') \n    ? page.allImages \n    : page.allImages.filter(imgObj => imgObj.category === bh.input.category);\n\n    console.log('Sorted Images: ' + bh.input.category, page.sortedImages)",
+        "functionName": "sd_xJKwSPJZ41xeMflw",
+        "category": "Function",
+        "x": 205,
+        "y": 280,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_db9cyGMXMHdmBdwk",
+        "type": "PageStart",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "get all images",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "getAllImages",
+        "category": "General",
+        "x": 105,
+        "y": 180,
+        "wires": [
+            [
+                "sd_YnQ6ecxTqkq38cIM"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "homeComponent"
+    },
+    {
+        "id": "sd_FQzqVzSH4qeWttMQ",
+        "type": "Script",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "page.categoryButtons.push({\n    name: 'All',\n    id: 'all'\n});\n\npage.allImages.forEach(obj => {\n    let tempObj = {\n        name: obj.name,\n        id: obj.category\n    }\n    // Check for duplicates\n    if(page.categoryButtons.filter(item => item.name === tempObj.name).length < 1) {\n        page.categoryButtons.push(tempObj);\n    }\n});\n\npage.isLoading = false;",
+        "functionName": "sd_FQzqVzSH4qeWttMQ",
+        "category": "Function",
+        "x": 465,
+        "y": 180,
+        "wires": [
+            [
+                "sd_JIZwV69WDCwO7NJB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_eP0xqmWdyCK0J1qP",
+        "type": "PageCallService",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "call get all images",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "sd_D0mVnaqNHaMT83OW",
+            "type": "tab",
+            "createdDate": "2022-06-06T09:27:00.540Z",
+            "label": "home",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_db9cyGMXMHdmBdwk",
+            "flowName": "getAllImages"
+        },
+        "inputVariables": [],
+        "outputMapping": [],
+        "serviceImportPath": "./home",
+        "startName": "getAllImages",
+        "inputParams": [],
+        "accept_csd": false,
+        "functionName": "callGetAllImages",
+        "category": "General",
+        "x": 320,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_JIZwV69WDCwO7NJB",
+        "type": "PageCallService",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "sd_D0mVnaqNHaMT83OW",
+            "type": "tab",
+            "createdDate": "2022-06-06T09:27:00.540Z",
+            "label": "home",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_DhFv3GrY0aMa77Jl",
+            "flowName": "getImageByCategory"
+        },
+        "inputVariables": [
+            {
+                "key": "category",
+                "map": true,
+                "valueType": "this.page",
+                "value": "selectedCategory"
+            }
+        ],
+        "outputMapping": [],
+        "serviceImportPath": "./home",
+        "startName": "getImageByCategory",
+        "inputParams": [
+            "this.page.selectedCategory"
+        ],
+        "accept_csd": false,
+        "functionName": "sd_JIZwV69WDCwO7NJB",
+        "category": "General",
+        "x": 565,
+        "y": 180,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_3y4XRyxQgXQKJ62v",
+        "type": "PageCallService",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "sd_z07jbAfzKaE43MYh",
+            "type": "tab",
+            "createdDate": "2022-06-06T10:52:44.952Z",
+            "label": "genericApi",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_VhkBrIazam1cc5l1",
+            "flowName": "getImages"
+        },
+        "inputVariables": [
+            {
+                "key": "url",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "url"
+            }
+        ],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "result",
+                "valueType": "this.page",
+                "value": "allImages",
+                "mapVarName": "result",
+                "localVar": "this.page.allImages"
+            }
+        ],
+        "serviceImportPath": "app/sd-services/genericApi",
+        "startName": "getImages",
+        "inputParams": [
+            "bh.input.url"
+        ],
+        "accept_bh": false,
+        "accept_csd": true,
+        "functionName": "sd_3y4XRyxQgXQKJ62v",
+        "category": "General",
+        "x": 365,
+        "y": 180,
+        "wires": [
+            [
+                "sd_FQzqVzSH4qeWttMQ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_YnQ6ecxTqkq38cIM",
+        "type": "Environment",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "envMaps": [
+            {
+                "flowVar": {
+                    "type": "this.page",
+                    "value": "ssdUrl"
+                },
+                "envProperty": "ssdURL"
+            }
+        ],
+        "functionName": "sd_YnQ6ecxTqkq38cIM",
+        "category": "General",
+        "x": 200,
+        "y": 180,
+        "wires": [
+            [
+                "sd_7EFnE9e7mVaCRwEb"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_7EFnE9e7mVaCRwEb",
+        "type": "Script",
+        "z": "sd_D0mVnaqNHaMT83OW",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.input.url = page.ssdUrl + 'get-all-images';\npage.isLoading = true;",
+        "functionName": "sd_7EFnE9e7mVaCRwEb",
+        "category": "Function",
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "sd_3y4XRyxQgXQKJ62v"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    }
+]
