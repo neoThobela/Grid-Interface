@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutAlign="center stretch" [fxShow]="true" fxFill>
+<div fxLayout="row wrap" style="background: tomato" fxLayoutAlign="center stretch" [fxShow]="true" fxFill ngStyle.xs="background: yellow" ngStyle.sm="background: red" ngStyle.md="background: green">
   <div fxLayout="column wrap" fxFlex="90" fxLayoutGap="1.5em" fxLayoutAlign="start stretch" [fxShow]="true">
     <div fxLayout="row wrap" fxLayoutAlign="center stretch" [fxShow]="true">
       <div fxLayout="column wrap" fxFlex="80" fxLayoutAlign="start stretch" [fxShow]="true">
@@ -11,9 +11,9 @@
     <div fxLayout="row wrap" fxLayoutAlign="start stretch" [fxShow]="true" *ngIf="page.isLoading">
       <mat-progress-spinner [mode]></mat-progress-spinner>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="1em" fxLayoutAlign="start stretch" [fxShow]="true" *ngIf="!page.isLoading &amp;&amp; page.categoryButtons.length &gt; 0"><button mat-raised-button *ngFor="let btn of page.categoryButtons" [class.selectedBtn]="page.selectedCategory === btn.id" (click)="getImageByCategory(btn.id)">{{btn.name}}</button></div>
+    <div fxLayout="row wrap" fxLayoutGap="1em" fxLayoutAlign="start stretch" [fxShow]="true" *ngIf="!page.isLoading &amp;&amp; page.categoryButtons.length &gt; 0" fxLayoutAlign.xs="center space-around" fxLayout.xs="column"><button mat-raised-button *ngFor="let btn of page.categoryButtons" [class.selectedBtn]="page.selectedCategory === btn.id" fxFlex.xs="100" (click)="getImageByCategory(btn.id)">{{btn.name}}</button></div>
     <div fxLayout="row wrap" fxLayoutAlign="space-between stretch" [fxShow]="true" *ngIf="!page.isLoading &amp;&amp; page.sortedImages.length &gt; 0">
-      <div fxLayout="column wrap" class="gridImageContainer" fxFlex="31" fxLayoutAlign="start stretch" [fxShow]="true" *ngFor="let obj of page.sortedImages"><img imgSrc="{{obj.image}}"></div>
+      <div fxLayout="column wrap" class="gridImageContainer" fxFlex="23" fxLayoutAlign="start stretch" [fxShow]="true" *ngFor="let obj of page.sortedImages" fxFlex.sm="48" fxFlex.xs="100"><img imgSrc="{{obj.image}}"></div>
     </div>
   </div>
 </div>
